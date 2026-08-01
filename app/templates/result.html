@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagnosis result — PlantCare AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <a class="brand" href="{{ url_for('index') }}">
+      <svg class="brand-mark" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 24C13 24 4 19.5 4 11.5C4 6.5 8 3 13 3C13 3 13 15 13 24Z" fill="#6B9C4B"/>
+        <path d="M13 24C13 24 22 19.5 22 11.5C22 6.5 18 3 13 3C13 3 13 15 13 24Z" fill="#4F7A38"/>
+        <path d="M13 5V22" stroke="#16281F" stroke-width="0.7" stroke-linecap="round"/>
+      </svg>
+      PlantCare AI
+    </a>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Diagnose</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="result-wrap">
+    <span class="eyebrow">Diagnosis complete</span>
+    <h1 style="font-size:32px; margin-top:10px;">Here's what we found</h1>
+
+    <div class="result-grid">
+      <div class="result-image">
+        <img src="{{ image_url }}" alt="Uploaded leaf">
+      </div>
+
+      <div class="diagnosis-card">
+        <span class="eyebrow">{{ crop }}</span>
+        <div class="diagnosis-name">{{ disease }}</div>
+
+        <div class="confidence-bar">
+          <div class="confidence-fill" style="width:{{ confidence }}%;"></div>
+        </div>
+        <div class="confidence-label">{{ confidence }}% confidence</div>
+
+        <div class="recommend-list">
+          <h3>Recommended next steps</h3>
+          <ul>
+            {% for tip in tips %}
+            <li>{{ tip }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="result-actions">
+          <a class="btn btn-primary" href="{{ url_for('index') }}">Diagnose another leaf</a>
+          <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">View history</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-foot">PlantCare AI — built for early detection, not a substitute for agronomic advice.</footer>
+</div>
+</body>
+</html>

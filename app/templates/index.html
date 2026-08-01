@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PlantCare AI — Diagnose your plant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <a class="brand" href="{{ url_for('index') }}">
+      <svg class="brand-mark" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 24C13 24 4 19.5 4 11.5C4 6.5 8 3 13 3C13 3 13 15 13 24Z" fill="#6B9C4B"/>
+        <path d="M13 24C13 24 22 19.5 22 11.5C22 6.5 18 3 13 3C13 3 13 15 13 24Z" fill="#4F7A38"/>
+        <path d="M13 5V22" stroke="#16281F" stroke-width="0.7" stroke-linecap="round"/>
+      </svg>
+      PlantCare AI
+    </a>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Diagnose</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('login') }}">Log in</a>
+      <a class="btn btn-secondary" href="{{ url_for('register') }}" style="padding:9px 18px;">Sign up</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Leaf-level diagnostics</span>
+      <h1>Know what's wrong with your plant before it spreads.</h1>
+      <p class="lede">Upload a photo of any leaf and PlantCare AI compares it against thousands of labeled cases to flag disease, estimate severity, and suggest a next step — in seconds.</p>
+      <a class="btn btn-primary" href="#upload">Diagnose a leaf</a>
+
+      <div class="leaf-stats">
+        <div>
+          <div class="leaf-stat-num">12</div>
+          <div class="leaf-stat-label">CROPS COVERED</div>
+        </div>
+        <div>
+          <div class="leaf-stat-num">1,000+</div>
+          <div class="leaf-stat-label">LABELED IMAGES</div>
+        </div>
+        <div>
+          <div class="leaf-stat-num">&lt; 3s</div>
+          <div class="leaf-stat-label">AVG. RESPONSE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-card" id="upload">
+      <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
+        <div class="upload-zone">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 22V6M17 6L11 12M17 6L23 12" stroke="#4F7A38" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 24V26C6 27.1 6.9 28 8 28H26C27.1 28 28 27.1 28 26V24" stroke="#4F7A38" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <div class="primary-text">Drop a leaf photo here</div>
+          <div class="secondary-text">or click to browse — JPG / PNG, up to 10MB</div>
+          <input type="file" name="leaf_image" accept="image/*" style="margin-top:14px;">
+        </div>
+        <button class="btn btn-primary btn-full" type="submit">Analyze leaf</button>
+      </form>
+      <div class="sample-thumbs">
+        <img src="{{ url_for('static', filename='img/sample-healthy.jpg') }}" alt="Healthy sample leaf">
+        <img src="{{ url_for('static', filename='img/sample-diseased.jpg') }}" alt="Diseased sample leaf">
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot">PlantCare AI — built for early detection, not a substitute for agronomic advice.</footer>
+</div>
+</body>
+</html>
